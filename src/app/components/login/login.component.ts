@@ -57,7 +57,10 @@ export class LoginComponent implements OnInit {
       console.log('login response:', response);
 
       this.authService.setToken(response);
-      this.userService.subUsers = response['sub_user_list'];
+      this.authService.subUsers = response['sub_user_list'];
+      // this.userService.setProfile(response['sub_user_list'][0].id);
+      // this.userService.userName = response['sub_user_list'][0].name;
+
       if (response.token) this.router.navigate(['/home']);
     });
     // this.router.navigate(['subin/main']);

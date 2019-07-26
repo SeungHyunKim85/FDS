@@ -35,14 +35,14 @@
             hoverCard === 1 &&
             showNumber(movie.order) > hoverCard
           "
-          [class.toRight1]="
+          [class.toRightSide]="
             !isOpen &&
             cardMove &&
             hoverCard !== 1 &&
             hoverCard !== 6 &&
             showNumber(movie.order) > hoverCard
           "
-          [class.toLeft1]="
+          [class.toLeftSide]="
             !isOpen &&
             cardMove &&
             hoverCard !== 6 &&
@@ -56,6 +56,7 @@
             showNumber(movie.order) !== 0 &&
             showNumber(movie.order) < hoverCard
           "
+          [class.toDefault]="!cardMove"
         >
           <div class="title-card-container">
             <div
@@ -97,7 +98,7 @@
                       class="bob-card bob-card-adult"
                       [class.bobup]="bobup"
                       [style.left.%]="bobupLeft()"
-                      [style.transform]="bobScale"
+                      [class.bob-scale]="bobup"
                       [style.transform-origin]="bobupTransformOrigin()"
                     >
                       <div class="image-rotator bob-background">
@@ -175,6 +176,26 @@
                                     >
                                       {{ feature ? feature.name : "" }}
                                     </li>
+                                    <ng-template
+                                      [ngIf]="moviesDetail.feature.length < 3"
+                                    >
+                                      <li
+                                        class="evidence-text evidence-text-{{
+                                          moviesDetail.feature.length + i
+                                        }}"
+                                        *ngFor="
+                                          let genre of moviesDetail.genre
+                                            ? moviesDetail.genre.slice(
+                                                0,
+                                                3 - moviesDetail.feature.length
+                                              )
+                                            : '';
+                                          index as i
+                                        "
+                                      >
+                                        {{ genre.name ? genre.name : "" }}
+                                      </li>
+                                    </ng-template>
                                     <!-- <li
                                       class="evidence-text evidence-text-list"
                                     >
@@ -205,6 +226,7 @@
                                   data-rating="2"
                                   tabindex="0"
                                   class="nf-svg-button simpleround"
+                                  (click)="likeMovie(movie.id)"
                                 >
                                   <svg
                                     data-rating="2"
@@ -230,6 +252,7 @@
                                   data-rating="1"
                                   tabindex="0"
                                   class="nf-svg-button simpleround"
+                                  (click)="dislikeMovie(movie.id)"
                                 >
                                   <svg
                                     data-rating="1"
@@ -256,6 +279,7 @@
                                 role="link"
                                 tabindex="0"
                                 class="nf-svg-button simpleround"
+                                (click)="myList(movie.id)"
                               >
                                 <svg
                                   class="svg-icon svg-icon-mylist-add"
