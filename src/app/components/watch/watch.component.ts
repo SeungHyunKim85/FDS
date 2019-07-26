@@ -14,10 +14,10 @@ export class WatchComponent implements AfterViewInit, OnDestroy {
   isInactive: boolean;
   pauseMovie: boolean;
 
-  // 데이터 받았다고 가정함
+  // 영화정보 데이터 받았다고 가정함
   movieTitle: string = 'Big Buck Bunny';
-  year: number = 2019;
-  old: string = "All";
+  madeYear: number = 2019;
+  ageLimit: string = "All";
   runningTime: string = '09:56';
   movieIntro: string = 'Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Nulla vitae elit libero, a pharetra augue. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Maecenas sed diam eget risus varius blandit sit amet non magna.';
 
@@ -73,6 +73,7 @@ export class WatchComponent implements AfterViewInit, OnDestroy {
       myControlBar.appendChild(newDiv);
       newDiv.classList.add('back-forward-contain');
       newDiv.innerHTML = newButton;
+      
       document.querySelector('#moveback').addEventListener('click', this.moveBack);
       document.querySelector('#moveforward').addEventListener('click', this.moveForward);
 
