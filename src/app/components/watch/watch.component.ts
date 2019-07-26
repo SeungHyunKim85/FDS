@@ -10,6 +10,8 @@ declare let videojs: any;
 export class WatchComponent implements AfterViewInit, OnDestroy {
   vidObj: any;
   poster: string = 'https://i.ytimg.com/vi/YE7VzlLtp-4/maxresdefault.jpg';
+  
+  // 샘플 영상 링크
   video: string = 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4';
   isInactive: boolean;
   pauseMovie: boolean;
@@ -17,8 +19,8 @@ export class WatchComponent implements AfterViewInit, OnDestroy {
   // 영화정보 데이터 받았다고 가정함
   movieTitle: string = 'Big Buck Bunny';
   madeYear: number = 2019;
-  ageLimit: string = "All";
-  runningTime: string = '09:56';
+  ageLimit: string = '12';
+  runningTime: string = '9분 56초';
   movieIntro: string = 'Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Nulla vitae elit libero, a pharetra augue. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Maecenas sed diam eget risus varius blandit sit amet non magna.';
 
   @ViewChild('myvid', null) vid: ElementRef;
@@ -79,7 +81,7 @@ export class WatchComponent implements AfterViewInit, OnDestroy {
 
       // 플레이어 구동 시 lastTime부터 플레이 시작
       myPlayer.currentTime(localStorage.getItem('lastTime'));
-      videojs.log(`마지막으로 저장된 시간 : ${myPlayer.currentTime()} 초`);
+      videojs.log(`마지막으로 저장된 시간 : ${Math.round(myPlayer.currentTime())} 초`);
     });         
 
     // *테스트* beforunload 이벤트(새로고침, url 변경) 발생 시 localstorage에 현재 시간(초) 저장
