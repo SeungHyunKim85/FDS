@@ -85,7 +85,7 @@ export class WatchComponent implements AfterViewInit, OnDestroy {
       document.querySelector('#moveforward').addEventListener('click', this.moveForward);
 
 
-
+      //test
       // 플레이어 구동 시 lastTime부터 플레이 시작
       myPlayer.currentTime(localStorage.getItem('lastTime'));
       this.minOfMovie = Math.round(myPlayer.currentTime() / 60);
