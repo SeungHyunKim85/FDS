@@ -25,7 +25,7 @@ export class SliderComponent implements OnInit, OnChanges {
 
   tabShow: boolean = false;
   movies: MoviePreview[];
-
+  moviesLength: number;
   // slider의 총 개수
   slider: number;
   // Tab 배열
@@ -99,6 +99,9 @@ export class SliderComponent implements OnInit, OnChanges {
       ...movie,
       order: index + 1
     }));
+    this.moviesLength = this.moviesList.length;
+    // console.log(this.moviesLength);
+
     if (this.default) {
       this.moviesClone();
     }
@@ -182,23 +185,23 @@ export class SliderComponent implements OnInit, OnChanges {
 
   cardHover(movieOrder, movieId) {
     if (!this.isOpen) {
-      this.bobup = movieOrder;
-      // setTimeout(() => {
-      //   this.bobScale = "scale(0.99999)";
-      // }, 300);
+      setTimeout(() => {
+        this.bobup = movieOrder;
+        this.bobScale = "scale(0.99999)";
+      }, 300);
     }
-    // console.log("호버됬당");
+    this.cardMove = true;
+    console.log("호버됬당");
     this.hoverCard =
       movieOrder % this.cardCount !== 0 ? movieOrder % this.cardCount : 6;
-    if (this.cardMove) return;
+    // if (this.cardMove) return;
     this.hoverMoviesDetail(movieId);
-    this.cardMove = true;
   }
 
   cardHoverLeave() {
-    this.bobScale = "scale(0.52222)";
     // console.log(this.moviesDetail);
     this.cardMove = false;
+    this.bobScale = "scale(0.52222)";
     setTimeout(() => {
       this.bobup = 0;
       this.moviesDetail = {
@@ -231,7 +234,7 @@ export class SliderComponent implements OnInit, OnChanges {
       };
     }, 300);
 
-    // console.log("호버 나갔당");
+    console.log("호버 나갔당");
     // console.log(this.isOpen);
   }
 
@@ -279,8 +282,12 @@ export class SliderComponent implements OnInit, OnChanges {
 
   showDetail() {
     // console.log(this.category);
-    console.log(this.movies);
-    console.log(this.default);
+    // console.log(this.movies);
+    // console.log(this.default);
+    // console.log(this.bobup === order);
+    // console.log(this.bobup);
+    // console.log(order);
+    this.bobup = 0;
     this.isOpen = true;
     this.sliderOpen.emit(this.category);
   }
